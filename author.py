@@ -32,13 +32,20 @@ class Author:
     def __repr__(self):
         return f"Author(id={self.id}, name={self.name})"
     
-    
+
 
 
 # Create author/save to db
 king = Author("Stephen King")
 king.save()
-print(king)
+koontz = Author("Dean Koontz")
+koontz.save()
+crichton = Author("Michael Crichton")
+crichton.save()
+mcwhorter = Author("john McWhorter")
+mcwhorter.save()
+
+
 
 # Fetch and print all authors
 authors = Author.all_authors()
