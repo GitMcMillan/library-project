@@ -23,5 +23,8 @@ class Book:
       CONN.commit()
       self.id = CURSOR.lastrowid
 
+  def __repr__(self):
+    return f"Book: {self.title}"
+
 it = Book("It")
 print(it)
