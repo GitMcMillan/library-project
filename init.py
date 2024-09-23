@@ -7,7 +7,7 @@ CURSOR = CONN.cursor()
 #if table doesnt exist, create it
 CURSOR.execute('''
   CREATE TABLE IF NOT EXISTS authors(
-      id INTEGER PRIMARY KEY,
+      id INTEGER PRIMARY KEY ,
       name TEXT
       )               
 ''' )

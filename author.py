@@ -50,10 +50,10 @@ koontz = Author("Dean Koontz")
 koontz.save()
 crichton = Author("Michael Crichton")
 crichton.save()
-mcwhorter = Author("john McWhorter")
+mcwhorter = Author("John McWhorter")
 mcwhorter.save()
-mcwhorter.name = "John McWhorter"
-mcwhorter.update_name("John McWhorter")
+
+
 
 
 

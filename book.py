@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
 from init import CONN, CURSOR
+from author import Author
 
-class Book:
+class Books:
   def __init__(self, title, author_id=None, id=None):
     self.title = title
     self.author_id = author_id
@@ -23,8 +24,18 @@ class Book:
       CONN.commit()
       self.id = CURSOR.lastrowid
 
-  def __repr__(self):
-    return f"Book: {self.title}"
+  @classmethod
+  def all_books(cls):
+    '''return books from db as a list'''
+    CURSOR.execute("SELECT * FROM books")
+    book_rows = CURSOR.fetchall()
+    return [cls(title=row[1], author_id=row[2], id=row[0]) for row in book_rows]
 
-it = Book("It")
+
+  def __repr__(self):
+    return f"Book:(id={self.id}, {self.title}, author_id={self.author_id})"
+
+it = Books("It", 1)
 print(it)
+all_of_em = Books.all_books()
+print(all_of_em)
