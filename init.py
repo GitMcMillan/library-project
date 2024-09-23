@@ -11,4 +11,17 @@ CURSOR.execute('''
       name TEXT
       )               
 ''' )
+
+
+#create books table if it doenst exist
+CURSOR.execute('''
+  CREATE TABLE IF NOT EXISTS books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    author_id INTEGER,
+    FOREIGN KEY (author_id) REFERENCES author(id)
+  )
+''')
+
+
 CONN.commit()
