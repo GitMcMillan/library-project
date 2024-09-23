@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sqlite3
 
-CONN = sqlite3.connect('author.db')
+CONN = sqlite3.connect('library.db')
 CURSOR = CONN.cursor()
 
 #if table doesnt exist, create it
