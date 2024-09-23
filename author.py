@@ -21,6 +21,14 @@ class Author:
             CURSOR.execute("INSERT INTO authors (name) VALUES (?)", (self.name,))
             CONN.commit()
             self.id = CURSOR.lastrowid
+    
+    def update_name(self, new_name):
+        '''Updated the authors name in database and object'''
+        self.name = new_name
+        CURSOR.execute("UPDATE authors SET name = ? WHERE id = ?", (self.name, self.id))
+        CONN.commit()
+
+
 
     @classmethod
     def all_authors(cls):
@@ -44,6 +52,8 @@ crichton = Author("Michael Crichton")
 crichton.save()
 mcwhorter = Author("john McWhorter")
 mcwhorter.save()
+mcwhorter.name = "John McWhorter"
+mcwhorter.update_name("John McWhorter")
 
 
 
@@ -51,6 +61,8 @@ mcwhorter.save()
 authors = Author.all_authors()
 for author in authors:
     print(author)
+
+print(mcwhorter)
 
 
 # def test():
