@@ -36,6 +36,7 @@ class Books:
     return f"Book:(id={self.id}, {self.title}, author_id={self.author_id})"
 
 it = Books("It", 1)
+it.save()
 print(it)
 all_of_em = Books.all_books()
 print(all_of_em)
