@@ -8,7 +8,7 @@ CURSOR = CONN.cursor()
 CURSOR.execute('''
   CREATE TABLE IF NOT EXISTS authors(
       id INTEGER PRIMARY KEY ,
-      name TEXT
+      name TEXT UNIQUE 
       )               
 ''' )
 
@@ -19,7 +19,7 @@ CURSOR.execute('''
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     author_id INTEGER,
-    FOREIGN KEY (author_id) REFERENCES author(id)
+    FOREIGN KEY (author_id) REFERENCES authors(id)
   )
 ''')
 
