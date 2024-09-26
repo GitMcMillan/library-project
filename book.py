@@ -8,6 +8,13 @@ class Books:
     self.title = title
     self.author_id = author_id
     self.id = id
+
+
+  def get_author_name(self):
+    '''Fetch the author's name from the authors table using author_id'''
+    CURSOR.execute("SELECT name FROM authors WHERE id = ?", (self.author_id,))
+    author_row = CURSOR.fetchone()
+    return author_row[0] if author_row else "Unknown Author"
   
   def save(self):
     '''inserts book into db if not exists, else retrieves book'''
@@ -19,7 +26,7 @@ class Books:
       #if book exists, grab id
       self.id = result[0]
     else:
-      #book doesnt exist. Insertt it into db (title, author_id)
+      #book doesnt exist. Insert it into db (title, author_id)
       CURSOR.execute("INSERT INTO books (title, author_id) VALUES (?, ?)", (self.title, self.author_id))
       CONN.commit()
       self.id = CURSOR.lastrowid
@@ -45,7 +52,8 @@ class Books:
 
 
   def __repr__(self):
-    return f"Book:(id={self.id}, {self.title}, author_id={self.author_id})"
+    author_name = self.get_author_name()
+    return f"Book:(id={self.id}, {self.title}, author_id={author_name})"
 
 it = Books("It", 1)
 it.save()
