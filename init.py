@@ -19,9 +19,10 @@ CURSOR.execute('''
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     author_id INTEGER,
+    UNIQUE(title, author_id)
     FOREIGN KEY (author_id) REFERENCES authors(id)
   )
 ''')
 
-
+CURSOR.execute("PRAGMA foreign_keys = ON;")
 CONN.commit()

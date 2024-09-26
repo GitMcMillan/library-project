@@ -32,6 +32,18 @@ class Books:
     return [cls(title=row[1], author_id=row[2], id=row[0]) for row in book_rows]
 
 
+  @classmethod
+  def find_by_title(cls, title):
+    '''find book by its title (duh)'''
+    CURSOR.execute("SELECT * FROM books WHERE title = ?",(title,))
+    book_row = CURSOR.fetchone()
+    if book_row:
+      return cls(title=book_row[1], author_id=book_row[2], id=book_row[0])
+    else:
+      return None
+
+
+
   def __repr__(self):
     return f"Book:(id={self.id}, {self.title}, author_id={self.author_id})"
 
@@ -40,3 +52,9 @@ it.save()
 print(it)
 all_of_em = Books.all_books()
 print(all_of_em)
+
+book = Books.find_by_title("It")
+if book:
+  print(f"Book found: {book}")
+else:
+  print("Book not found.")

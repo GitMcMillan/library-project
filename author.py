@@ -36,6 +36,12 @@ class Author:
         CURSOR.execute("SELECT * FROM authors")
         author_rows = CURSOR.fetchall()
         return [cls(name=row[1], id=row[0]) for row in author_rows]
+    
+    def get_author_name(self):
+        '''fetches authors name from db'''
+        CURSOR.execute("SELECT name FROM authors WHERE id = ?", (self.author_id,))
+        author_row = CURSOR.fetchone()
+        return author_row[0] if author_row else "Unknown Author"
 
     def __repr__(self):
         return f"Author(id={self.id}, name={self.name})"
