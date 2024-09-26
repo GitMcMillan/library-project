@@ -17,10 +17,10 @@ CURSOR.execute('''
 CURSOR.execute('''
   CREATE TABLE IF NOT EXISTS books (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT,
-    author_id INTEGER,
-    UNIQUE(title, author_id)
-    FOREIGN KEY (author_id) REFERENCES authors(id)
+    title TEXT NOT NULL,
+    author_id INTEGER NOT NULL,
+    UNIQUE(title, author_id),
+    FOREIGN KEY (author_id) REFERENCES authors(id) ON DELETE CASCADE
   )
 ''')
 

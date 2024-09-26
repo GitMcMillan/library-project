@@ -28,6 +28,13 @@ class Author:
         CURSOR.execute("UPDATE authors SET name = ? WHERE id = ?", (self.name, self.id))
         CONN.commit()
 
+    def delete(self):
+        '''delete author and paired books from db'''
+        CURSOR.execute("DELETE FROM books WHERE author_id = ?", (self.id,))
+        CURSOR.execute("DELETE FROM authors WHERE id = ?", (self.id,))
+        CONN.commit()
+
+
 
 
     @classmethod

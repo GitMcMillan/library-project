@@ -31,6 +31,11 @@ class Books:
       CONN.commit()
       self.id = CURSOR.lastrowid
 
+  def delete(self):
+    '''delete a book from db'''
+    CURSOR.execute("DELETE FROM books WHERE id = ?", (self.id,))
+    CONN.commit()
+
   @classmethod
   def all_books(cls):
     '''return books from db as a list'''
@@ -42,7 +47,7 @@ class Books:
   @classmethod
   def find_by_title(cls, title):
     '''find book by its title (duh)'''
-    CURSOR.execute("SELECT * FROM books WHERE title = ?",(title,))
+    CURSOR.execute("SELECT * FROM books WHERE LOWER(title) = LOWER(?)",(title,))
     book_row = CURSOR.fetchone()
     if book_row:
       return cls(title=book_row[1], author_id=book_row[2], id=book_row[0])
@@ -53,13 +58,19 @@ class Books:
 
   def __repr__(self):
     author_name = self.get_author_name()
-    return f"Book:(id={self.id}, {self.title}, author_id={author_name})"
+    return f"Book:(id={self.id}, {self.title}, author={author_name})"
 
 it = Books("It", 1)
 it.save()
 print(it)
 all_of_em = Books.all_books()
-print(all_of_em)
+for book in all_of_em:
+  print(book)
+
+not_it = Books("Not It", 1)
+not_it.save()
+print(not_it)
+not_it.delete()
 
 book = Books.find_by_title("It")
 if book:
