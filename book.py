@@ -3,7 +3,7 @@
 from init import CONN, CURSOR
 from author import Author
 
-class Books:
+class Book:
   def __init__(self, title, author_id=None, id=None):
     self.title = title
     self.author_id = author_id
@@ -40,7 +40,7 @@ class Books:
     '''fetch and list books by specific author'''
     CURSOR.exe("SELECT * FROM author WHERE author_id = ?", (author_id,))
     book_rows = CURSOR.fetchall()
-    return [Books(title=row[1], author_id=row[2], id=row[0]) for row in book_rows]
+    return [Book(title=row[1], author_id=row[2], id=row[0]) for row in book_rows]
 
   @classmethod
   def all_books(cls):
@@ -66,20 +66,20 @@ class Books:
     author_name = self.get_author_name()
     return f"Book:(id={self.id}, {self.title}, author={author_name})"
 
-it = Books("It", 1)
+it = Book("It", 1)
 it.save()
 print(it)
-all_of_em = Books.all_books()
+all_of_em = Book.all_books()
 for book in all_of_em:
   print(book)
 
-not_it = Books("Not It", 1)
+not_it = Book("Not It", 1)
 not_it.save()
 print(not_it)
 not_it.delete()
 
 
-book = Books.find_by_title("It")
+book = Book.find_by_title("It")
 if book:
   print(f"Book found: {book}")
 else:
