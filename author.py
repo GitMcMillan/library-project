@@ -34,6 +34,8 @@ class Author:
         CURSOR.execute("DELETE FROM authors WHERE id = ?", (self.id,))
         CONN.commit()
 
+ 
+
 
 
 

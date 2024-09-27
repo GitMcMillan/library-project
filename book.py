@@ -36,6 +36,12 @@ class Books:
     CURSOR.execute("DELETE FROM books WHERE id = ?", (self.id,))
     CONN.commit()
 
+  def list_books_by_author(author_id):
+    '''fetch and list books by specific author'''
+    CURSOR.exe("SELECT * FROM author WHERE author_id = ?", (author_id,))
+    book_rows = CURSOR.fetchall()
+    return [Books(title=row[1], author_id=row[2], id=row[0]) for row in book_rows]
+
   @classmethod
   def all_books(cls):
     '''return books from db as a list'''
@@ -71,6 +77,7 @@ not_it = Books("Not It", 1)
 not_it.save()
 print(not_it)
 not_it.delete()
+
 
 book = Books.find_by_title("It")
 if book:
