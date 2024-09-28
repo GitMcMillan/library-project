@@ -55,3 +55,9 @@ def main_menu():
       #search by title
       #exit
   
+def validate_author_id(author_id):
+  '''check if author exists in db'''
+  return Author.find_by_id(author_id) is not None
+
+find_author = validate_author_id(1)
+print(find_author)
