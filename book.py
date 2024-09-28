@@ -36,6 +36,13 @@ class Book:
     CURSOR.execute("DELETE FROM books WHERE id = ?", (self.id,))
     CONN.commit()
 
+  def update_title(self, new_title):
+    '''Update the book's title in the database and the object'''
+    self.title = new_title
+    CURSOR.execute("UPDATE books SET title = ? WHERE id = ?", (self.title, self.id))
+    CONN.commit()
+
+
   @classmethod
   def list_books_by_author(cls, author_id):
     '''Fetch and list books by a specific author'''

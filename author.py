@@ -34,6 +34,13 @@ class Author:
         CURSOR.execute("DELETE FROM authors WHERE id = ?", (self.id,))
         CONN.commit()
 
+    def update_name(self, new_name):
+        '''Update the author's name in the database'''
+        self.name = new_name
+        CURSOR.execute("UPDATE authors SET name = ? WHERE id = ?", (self.name, self.id))
+        CONN.commit()
+        print(f"Author ID {self.id} name updated to {self.name}")
+
     @classmethod
     def find_by_id(cls, id):
         '''find author by id'''

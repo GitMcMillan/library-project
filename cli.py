@@ -13,7 +13,9 @@ def main_menu():
         print("6. Delete a book")
         print("7. List books by author")
         print("8. Search for a book by title")
-        print("9. Exit")
+        print("9. Update author name")    # Option for updating author name
+        print("10. Update book title")    # Option for updating book title
+        print("11. Exit")
         print("*******************")
 
         choice = input("Select an option: ")
@@ -23,8 +25,8 @@ def main_menu():
             authors = Author.all_authors()
             if authors:
                 print("\nAuthors:")
-                for author in authors:
-                    print(author)
+                for i, author in enumerate(authors, start=1):
+                    print(f"{i}. {author}")
             else:
                 print("No authors found.")
 
@@ -50,8 +52,8 @@ def main_menu():
             books = Book.all_books()
             if books:
                 print("\nBooks:")
-                for book in books:
-                    print(book)
+                for i, book in enumerate(books, start=1):
+                    print(f"{i}. {book}")
             else:
                 print("No books found.")
 
@@ -85,8 +87,8 @@ def main_menu():
                 books_by_author = Book.list_books_by_author(author.id)
                 if books_by_author:
                     print(f"\nBooks by {author.name}:")
-                    for book in books_by_author:
-                        print(book)
+                    for i, book in enumerate(books_by_author, start=1):
+                        print(f"{i}. {book}")
                 else:
                     print(f"No books found for author {author.name}.")
             else:
@@ -102,6 +104,28 @@ def main_menu():
                 print("Book not found.")
 
         elif choice == "9":
+            # update author name
+            author_name = input("Enter the author's current name: ")
+            author = Author.find_by_name(author_name)
+            if author:
+                new_name = input("Enter the new name for the author: ")
+                author.update_name(new_name)
+                print(f"Author's name updated to '{new_name}'.")
+            else:
+                print("Author not found.")
+        
+        elif choice == "10":
+            # update book title
+            book_title = input("Enter the book's current title: ")
+            book = Book.find_by_title(book_title)
+            if book:
+                new_title = input("Enter the new title for the book: ")
+                book.update_title(new_title)
+                print(f"Book's title updated to '{new_title}'.")
+            else:
+                print("Book not found.")
+
+        elif choice == "11":
             # exit
             print("Goodbye!")
             break
@@ -123,3 +147,4 @@ def validate_author_name(author_name):
 
 # Start the main menu
 main_menu()
+
