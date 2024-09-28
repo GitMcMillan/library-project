@@ -65,23 +65,13 @@ class Book:
 
   def __repr__(self):
     author_name = self.get_author_name()
-    return f"Book:(id={self.id}, {self.title}, author={author_name})"
+    return f"`{self.title}`, by {author_name}"
 
 it = Book("It", 1)
 it.save()
-print(it)
-all_of_em = Book.all_books()
-for book in all_of_em:
-  print(book)
-
-not_it = Book("Not It", 1)
-not_it.save()
-print(not_it)
-not_it.delete()
 
 
-book = Book.find_by_title("It")
-if book:
-  print(f"Book found: {book}")
-else:
-  print("Book not found.")
+
+
+
+

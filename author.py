@@ -43,6 +43,16 @@ class Author:
             return cls(name=author_row[1], id=author_row[0])
         else:
             return None
+        
+    @classmethod
+    def find_by_name(cls, name):
+        '''find author by name'''
+        CURSOR.execute("SELECT * FROM authors WHERE name = ?", (name,))
+        author_row = CURSOR.fetchone()
+        if author_row:
+            return cls(name=author_row[1], id=author_row[0])
+        else:
+            return None
 
  
 
@@ -58,7 +68,7 @@ class Author:
     
 
     def __repr__(self):
-        return f"Author(id={self.id}, name={self.name})"
+        return f"{self.name}"
     
 
 
@@ -79,16 +89,12 @@ mcwhorter.save()
 
 # Fetch and print all authors
 authors = Author.all_authors()
-for author in authors:
-    print(author)
 
-print(mcwhorter)
+
+
 
 author = Author.find_by_id(1)
-if author:
-    print(f"Author found: {author}")
-else:
-    print("Author not found.")
+
 
 # def test():
 #   print("working")
