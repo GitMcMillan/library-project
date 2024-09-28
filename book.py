@@ -10,6 +10,20 @@ class Book:
     self.id = id
 
 
+
+  @property
+  def title(self):
+    return self._title
+
+  @title.setter
+  def title(self, new_title):
+    if isinstance(new_title, str) and len(new_title) > 0:
+        self._title = new_title
+    else:
+        raise ValueError("Book title must be a non-empty string")
+    
+
+
   def get_author_name(self):
     '''Fetch the author's name from the authors table using author_id'''
     CURSOR.execute("SELECT name FROM authors WHERE id = ?", (self.author_id,))

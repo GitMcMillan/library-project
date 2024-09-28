@@ -7,6 +7,17 @@ class Author:
         self.name = name
         self.id = id
 
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, new_name):
+        if isinstance(new_name, str) and len(new_name) > 2:
+            self._name = new_name
+        else:
+            raise ValueError("Author name must be at least 3 characters long")
+
     def save(self):
         '''Inserts author into the db only if not already present, otherwise retrieves the existing author'''
         # Check if the author already exists
@@ -22,11 +33,6 @@ class Author:
             CONN.commit()
             self.id = CURSOR.lastrowid
     
-    def update_name(self, new_name):
-        '''Updated the authors name in database and object'''
-        self.name = new_name
-        CURSOR.execute("UPDATE authors SET name = ? WHERE id = ?", (self.name, self.id))
-        CONN.commit()
 
     def delete(self):
         '''delete author and paired books from db'''
