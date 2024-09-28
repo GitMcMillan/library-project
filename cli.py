@@ -2,62 +2,102 @@ from author import Author
 from book import Book
 
 def main_menu():
-  while True:
-    print("\nLibrary Menu")
-    print("1. List all authors")
-    print("2. Add a new author")
-    print("3. List all books")
-    print("4. Add a new book")
-    print("5. Delete a book")
-    print("6. List books by author")
-    print("7. Search for a book by title")
-    print("8. Exit")
+    while True:
+        print("\nLibrary Menu")
+        print("1. List all authors")
+        print("2. Add a new author")
+        print("3. List all books")
+        print("4. Add a new book")
+        print("5. Delete a book")
+        print("6. List books by author")
+        print("7. Search for a book by title")
+        print("8. Exit")
 
-    choice = input("Select an option")
+        choice = input("Select an option: ")
 
-    if choice == "1":
-      #list all author
-      authors = Author.all_authors()
-      if authors:
-        print("\nAuthors:")
-        for author in authors:
-          print(author)
+        if choice == "1":
+            # list authors
+            authors = Author.all_authors()
+            if authors:
+                print("\nAuthors:")
+                for author in authors:
+                    print(author)
+            else:
+                print("No authors found.")
 
-    if choice == "2":
-      #add new author
-      name = input("Enter the authors name: ")
-      new_author = Author(name)
-      new_author.save()
-      print(f"Author '{name}' added.") 
+        elif choice == "2":
+            # add author
+            name = input("Enter the author's name: ")
+            new_author = Author(name)
+            new_author.save()
+            print(f"Author '{name}' added.")
 
-    if choice == "3":
-      #list all books
-      books = Book.all_books()
-      if books:
-        print("\nBooks:")
-        for book in books:
-          print(book)
-      else:
-        print("No books found.")
-      
-    elif choice == "4":
-      #Add new book
-      title = input("Enter the book's title: ")
-      author_id = input("Enter the author ID: ")
-      if validate_author_id(author_id):
-        new_book = Book(title, author_id)
-        new_book.save()
-      print(f"Book '{title}' added.")
-    else:
-      print("Invalid author ID. Please try again.")
-      #delete a book
-      #list by author
-      #search by title
-      #exit
-  
+        elif choice == "3":
+            #list books
+            books = Book.all_books()
+            if books:
+                print("\nBooks:")
+                for book in books:
+                    print(book)
+            else:
+                print("No books found.")
+
+        elif choice == "4":
+            #add book
+            title = input("Enter the book's title: ")
+            author_id = input("Enter the author ID: ")
+            if validate_author_id(author_id):
+                new_book = Book(title, author_id)
+                new_book.save()
+                print(f"Book '{title}' added.")
+            else:
+                print("Invalid author ID. Please try again.")
+
+        elif choice == "5":
+            #delete book
+            book_title = input("Enter the book's title to delete: ")
+            book = Book.find_by_title(book_title)
+            if book:
+                book.delete()
+                print(f"Book '{book.title}' deleted.")
+            else:
+                print("Book not found.")
+
+        elif choice == "6":
+            #list by author
+            author_id = input("Enter the author ID: ")
+            if validate_author_id(author_id):
+                books_by_author = Book.list_books_by_author(author_id)
+                if books_by_author:
+                    print(f"\nBooks by Author ID {author_id}:")
+                    for book in books_by_author:
+                        print(book)
+                else:
+                    print("No books found for this author.")
+            else:
+                print("Invalid author ID.")
+
+        elif choice == "7":
+            #find by title
+            book_title = input("Enter the book's title to search: ")
+            book = Book.find_by_title(book_title)
+            if book:
+                print(f"Book found: {book}")
+            else:
+                print("Book not found.")
+
+        elif choice == "8":
+            #exit
+            print("Goodbye!")
+            break
+
+        else:
+            print("Invalid option, please try again.")
+
+# Helper function to validate author ID
 def validate_author_id(author_id):
-  '''check if author exists in db'''
-  return Author.find_by_id(author_id) is not None
+    '''Check if author exists in db'''
+    return Author.find_by_id(author_id) is not None
 
-find_author = validate_author_id(1)
-print(find_author)
+# Start the main menu
+main_menu()

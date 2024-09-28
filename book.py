@@ -36,11 +36,12 @@ class Book:
     CURSOR.execute("DELETE FROM books WHERE id = ?", (self.id,))
     CONN.commit()
 
-  def list_books_by_author(author_id):
-    '''fetch and list books by specific author'''
-    CURSOR.exe("SELECT * FROM author WHERE author_id = ?", (author_id,))
+  @classmethod
+  def list_books_by_author(cls, author_id):
+    '''Fetch and list books by a specific author'''
+    CURSOR.execute("SELECT * FROM books WHERE author_id = ?", (author_id,))
     book_rows = CURSOR.fetchall()
-    return [Book(title=row[1], author_id=row[2], id=row[0]) for row in book_rows]
+    return [cls(title=row[1], author_id=row[2], id=row[0]) for row in book_rows]
 
   @classmethod
   def all_books(cls):
