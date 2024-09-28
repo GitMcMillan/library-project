@@ -25,12 +25,24 @@ def main_menu():
             else:
                 print("No authors found.")
 
+            continue_choice = input("\nDo you want to go back to the menu? (y/n): ").lower()
+            if continue_choice != 'y':
+              print("Goodbye!")
+              break
+            
+
         elif choice == "2":
             # add author
             name = input("Enter the author's name: ")
             new_author = Author(name)
             new_author.save()
             print(f"Author '{name}' added.")
+
+            continue_choice = input("\nDo you want to go back to the menu? (y/n): ").lower()
+            if continue_choice != 'y':
+              print("Goodbye!")
+              break
+             
 
         elif choice == "3":
             #list books
@@ -41,6 +53,12 @@ def main_menu():
                     print(book)
             else:
                 print("No books found.")
+
+            continue_choice = input("\nDo you want to go back to the menu? (y/n): ").lower()
+            if continue_choice != 'y':
+              print("Goodbye!")
+              break
+            
 
         elif choice == "4":
             #add book
@@ -53,6 +71,12 @@ def main_menu():
             else:
                 print("Invalid author ID. Please try again.")
 
+            continue_choice = input("\nDo you want to go back to the menu? (y/n): ").lower()
+            if continue_choice != 'y':
+              print("Goodbye!")
+              break
+            
+
         elif choice == "5":
             #delete book
             book_title = input("Enter the book's title to delete: ")
@@ -62,6 +86,12 @@ def main_menu():
                 print(f"Book '{book.title}' deleted.")
             else:
                 print("Book not found.")
+
+            continue_choice = input("\nDo you want to go back to the menu? (y/n): ").lower()
+            if continue_choice != 'y':
+              print("Goodbye!")
+              break
+             
 
         elif choice == "6":
             #list by author
@@ -77,6 +107,12 @@ def main_menu():
             else:
                 print("Invalid author ID.")
 
+            continue_choice = input("\nDo you want to go back to the menu? (y/n): ").lower()
+            if continue_choice != 'y':
+              print("Goodbye!")
+              break
+             
+
         elif choice == "7":
             #find by title
             book_title = input("Enter the book's title to search: ")
@@ -86,6 +122,12 @@ def main_menu():
             else:
                 print("Book not found.")
 
+            continue_choice = input("\nDo you want to go back to the menu? (y/n): ").lower()
+            if continue_choice != 'y':
+              print("Goodbye!")
+              break
+            
+
         elif choice == "8":
             #exit
             print("Goodbye!")
@@ -93,6 +135,9 @@ def main_menu():
 
         else:
             print("Invalid option, please try again.")
+
+
+
 
 # Helper function to validate author ID
 def validate_author_id(author_id):
