@@ -34,6 +34,16 @@ class Author:
         CURSOR.execute("DELETE FROM authors WHERE id = ?", (self.id,))
         CONN.commit()
 
+    @classmethod
+    def find_by_id(cls, id):
+        '''find author by id'''
+        CURSOR.execute("SELECT * FROM authors WHERE id = ?", (id,))
+        author_row = CURSOR.fetchone()
+        if author_row:
+            return cls(name=author_row[1], id=author_row[0])
+        else:
+            return None
+
  
 
 
@@ -74,6 +84,11 @@ for author in authors:
 
 print(mcwhorter)
 
+author = Author.find_by_id(1)
+if author:
+    print(f"Author found: {author}")
+else:
+    print("Author not found.")
 
 # def test():
 #   print("working")

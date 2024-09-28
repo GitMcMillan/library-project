@@ -39,7 +39,17 @@ def main_menu():
           print(book)
       else:
         print("No books found.")
+      
+    elif choice == "4":
       #Add new book
+      title = input("Enter the book's title: ")
+      author_id = input("Enter the author ID: ")
+      if validate_author_id(author_id):
+        new_book = Book(title, author_id)
+        new_book.save()
+      print(f"Book '{title}' added.")
+    else:
+      print("Invalid author ID. Please try again.")
       #delete a book
       #list by author
       #search by title
