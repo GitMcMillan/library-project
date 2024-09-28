@@ -1,6 +1,7 @@
 from author import Author
 from book import Book
 
+
 def main_menu():
     while True:
         print("*******************")
@@ -13,8 +14,8 @@ def main_menu():
         print("6. Delete a book")
         print("7. List books by author")
         print("8. Search for a book by title")
-        print("9. Update author name")    # Option for updating author name
-        print("10. Update book title")    # Option for updating book title
+        print("9. Update author name")   
+        print("10. Update book title")   
         print("11. Exit")
         print("*******************")
 
@@ -146,5 +147,6 @@ def validate_author_name(author_name):
     return Author.find_by_name(author_name) is not None
 
 # Start the main menu
+
 main_menu()
 

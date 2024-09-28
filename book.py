@@ -74,8 +74,7 @@ class Book:
     author_name = self.get_author_name()
     return f"`{self.title}`, by {author_name}"
 
-it = Book("It", 1)
-it.save()
+
 
 
 

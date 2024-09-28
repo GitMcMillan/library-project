@@ -79,30 +79,6 @@ class Author:
     
 
 
-
-# Create author/save to db
-king = Author("Stephen King")
-king.save()
-koontz = Author("Dean Koontz")
-koontz.save()
-crichton = Author("Michael Crichton")
-crichton.save()
-mcwhorter = Author("John McWhorter")
-mcwhorter.save()
-
-
-
-
-
-# Fetch and print all authors
-authors = Author.all_authors()
-
-
-
-
-author = Author.find_by_id(1)
-
-
 # def test():
 #   print("working")
 
