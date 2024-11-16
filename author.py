@@ -16,7 +16,7 @@ class Author:
         if isinstance(new_name, str) and len(new_name) > 2:
             self._name = new_name
         else:
-            raise ValueError("Author name must be at least 3 characters long")
+            raise ValueError("Author name must be a string at least 3 characters long")
 
     def save(self):
         '''Inserts author into the db only if not already present, otherwise retrieves the existing author'''

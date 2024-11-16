@@ -175,3 +175,7 @@ def validate_author_name(author_name):
 main_menu()
 
 
+string = "string"
+string2 = "1"
+print(string)
+print(f"This is a {string}")

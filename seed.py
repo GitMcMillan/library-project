@@ -50,3 +50,7 @@ if __name__ == "__main__":
   seed_authors()
   seed_books()
   print("Database seeded successfully")
+
+
+
+  [expression for value in (list)]
