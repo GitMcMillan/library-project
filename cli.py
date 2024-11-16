@@ -165,6 +165,9 @@ def main_menu():
             print(Fore.GREEN + "Goodbye!" + Style.RESET_ALL)
             break
 
+if __name__ == "__main__":
+    main_menu()
+
 
 # Helper function to validate author name
 def validate_author_name(author_name):
